@@ -13,4 +13,4 @@ function funcFindC(name) {
 }
 const arrowFindC = (name) => name.startsWith('C');
 
-const firstC = names.find(arrowFindC);
+const firstC = names.find((name) => name.startsWith('C'));
