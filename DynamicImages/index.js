@@ -6,6 +6,8 @@ const imageFiles = [
   { path: './images/teddy-bear.jpg', description: 'Teddy Bear' }
 ];
 
+const insertedImagePaths = [];
+
 const selectEl = document.getElementById('imageSelector');
 const addImageBtn = document.getElementById('addImage');
 const imagesDiv = document.getElementById('images');
@@ -24,6 +26,12 @@ addImageBtn.addEventListener('click', () => {
     return;
   }
 
+  if (insertedImagePaths.includes(selectedImageValue)) {
+    console.log('image is already on the page');
+    return;
+  }
+
+  insertedImagePaths.push(selectedImageValue);
   // find method - look over workbook 5, page 1-7 and beyond
   const selectedImageObj = imageFiles.find((img) => img.path === selectedImageValue);
   const imgEl = document.createElement('img');
@@ -33,7 +41,8 @@ addImageBtn.addEventListener('click', () => {
 });
 
 clearBtn.addEventListener('click', () => {
-  const images = document.getElementsByTagName('img');
+  const images = imagesDiv.querySelectorAll('img');
+  insertedImagePaths.length = 0;
   Array.from(images).forEach((img) => {
     imagesDiv.removeChild(img);
   });
